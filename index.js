@@ -32,6 +32,9 @@ function getIDDataFromYummlyApi(searchTerm, callback) {
           _app_id: YUMMLY_ID_VALUE,
           q: `${searchTerm} cocktail`,
           maxResult: '1',
+          allowedCourse:`course^course-Cocktails`,
+          allowedCourse:`course^course-Beverages`,
+          excludedCourse: `course^course-Appetizers`,
         },
         dataType: 'jsonp',
         type: 'GET',
@@ -59,26 +62,33 @@ function getRecipeDataFromYummlyApi(recipeID, callback) {
 //function to render the YouTube results into a html string
 function renderYouTubeResult(result) {
   return `
-    <div class="col-6 js-video-thumb-box video-thumb-box">
+    <div class="js-video-thumb-box video-thumb-box">
       <div class="js-video-thumb video-thumb">
-          <iframe width="560" height="315" src="https://www.youtube.com/embed/${result.id.videoId}" frameborder="0" allowfullscreen></iframe>
+          <iframe src="https://www.youtube.com/embed/${result.id.videoId}" frameborder="0" allowfullscreen></iframe>
         <p class="video-title">${result.snippet.title}</p>
       </div>  
     </div>
   `;
 }
 
-//function to render the Yummly results into a html string
 //Identify the ingredient list length and loop thru the array 
+function renderYummlyIndregients(result) {
+  return result.ingredientLines.map((item) => `<li class="single-ingredient">${item}</li>`).join('');
+}
+
+//function to render the Yummly results into a html string
 function renderYummlyResult(result) {
+    const indredientList = renderYummlyIndregients(result);
     return `
-      <div class="col-6 js-recipe-box recipe-box">
+      <div class="js-recipe-box recipe-box">
         <div class="js-recipe recipe">
           <h2 class="recipe-name">${result.name}</h2>
           <h3 class="ingredient-title">Ingredients</h3>
-          <ul>
-          <li class="ingredient">${result.ingredientLines[0]}</li>
+          <ul class="ingredient-list">
+          ${indredientList}
           </ul>
+          <a class="btn full-recipe" href="${result.attribution.url}" target="_blank">View Full Recipe</a>
+          <span class="yummly-attribution">${result.attribution.html}</span>
         </div>  
       </div>
     `;
@@ -92,13 +102,18 @@ function displayYouTubeSearchData(data) {
 
 //function to loop over the data from the API then get the recipe ID
 function yummlyIDSearchData(data) {
+  if (!data.matches.length) {
+    console.log('no matches');
+  }
+  else {
     console.log(data);
     getRecipeDataFromYummlyApi(data.matches[0].id, displayYummlyRecipeSearchData);    
   }
+}
 
 //function to loop over the data from the API then join the html srtings and place on the DOM
 function displayYummlyRecipeSearchData(data) {
-    console.log(data);
+    console.log('RENDER', data);
     $('.js-yummly-search-results').html(renderYummlyResult(data));
   }
 
@@ -117,6 +132,4 @@ function watchSubmit() {
   });
 }
 
-$(() => {
-  watchSubmit()
-});
+$(watchSubmit);
