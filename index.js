@@ -1,9 +1,12 @@
 const YOUTUBE_SEARCH_URL = 'https://www.googleapis.com/youtube/v3/search';
 const YOUTUBE_KEY_VALUE = 'AIzaSyCKUPmD5aHfTTzLK-TslE6Nn9WFmWWEksY';
+const YUMMLY_ID_SEARCH_URL = 'https://api.yummly.com/v1/api/recipes';
+const YUMMLY_RECIPE_SEARCH_URL = 'https://api.yummly.com/v1/api/recipe/';
+const YUMMLY_KEY_VALUE = 'efa26fd562d5dd3b3356693fc7a47614';
+const YUMMLY_ID_VALUE = '2fdc1bfa';
 
-
-//function to get date from API
-function getDataFromApi(searchTerm, callback) {
+//function to get date from YouTube API
+function getDataFromYouTubeApi(searchTerm, callback) {
   const settings = {
     url: YOUTUBE_SEARCH_URL,
     data: {
@@ -20,8 +23,41 @@ function getDataFromApi(searchTerm, callback) {
   $.ajax(settings);
 }
 
-//function to render the results into a html string
-function renderResult(result) {
+//function to get ID data from Yummly API
+function getIDDataFromYummlyApi(searchTerm, callback) {
+    const settings = {
+        url: YUMMLY_ID_SEARCH_URL,
+        data: {
+          _app_key: YUMMLY_KEY_VALUE,
+          _app_id: YUMMLY_ID_VALUE,
+          q: `${searchTerm} cocktail`,
+          maxResult: '1',
+        },
+        dataType: 'jsonp',
+        type: 'GET',
+        success: callback
+      };
+    $.ajax(settings);
+  }
+
+  //function to get Recipe data from Yummly API
+function getRecipeDataFromYummlyApi(recipeID, callback) {
+    const settings = {
+        url: YUMMLY_RECIPE_SEARCH_URL + recipeID,
+        data: {
+          _app_key: YUMMLY_KEY_VALUE,
+          _app_id: YUMMLY_ID_VALUE,
+          maxResult: '1',
+        },
+        dataType: 'jsonp',
+        type: 'GET',
+        success: callback
+      };
+    $.ajax(settings);
+  }
+
+//function to render the YouTube results into a html string
+function renderYouTubeResult(result) {
   return `
     <div class="col-6 js-video-thumb-box video-thumb-box">
       <div class="js-video-thumb video-thumb">
@@ -32,11 +68,39 @@ function renderResult(result) {
   `;
 }
 
+//function to render the Yummly results into a html string
+//Identify the ingredient list length and loop thru the array 
+function renderYummlyResult(result) {
+    return `
+      <div class="col-6 js-recipe-box recipe-box">
+        <div class="js-recipe recipe">
+          <h2 class="recipe-name">${result.name}</h2>
+          <h3 class="ingredient-title">Ingredients</h3>
+          <ul>
+          <li class="ingredient">${result.ingredientLines[0]}</li>
+          </ul>
+        </div>  
+      </div>
+    `;
+  }
+
 //function to loop over the data from the API then join the html srtings and place on the DOM
 function displayYouTubeSearchData(data) {
-  const results = data.items.map((item, index) => renderResult(item));
-  $('.js-search-results').html(results);
+  const youTubeResults = data.items.map((item, index) => renderYouTubeResult(item));
+  $('.js-youtube-search-results').html(youTubeResults);
 }
+
+//function to loop over the data from the API then get the recipe ID
+function yummlyIDSearchData(data) {
+    console.log(data);
+    getRecipeDataFromYummlyApi(data.matches[0].id, displayYummlyRecipeSearchData);    
+  }
+
+//function to loop over the data from the API then join the html srtings and place on the DOM
+function displayYummlyRecipeSearchData(data) {
+    console.log(data);
+    $('.js-yummly-search-results').html(renderYummlyResult(data));
+  }
 
 
 //function to watch for click event and run functions
@@ -48,7 +112,8 @@ function watchSubmit() {
     // clear out the input
     searchTerm = query
     queryTarget.val("");
-    getDataFromApi(query, displayYouTubeSearchData);
+    getDataFromYouTubeApi(query, displayYouTubeSearchData);
+    getIDDataFromYummlyApi(query, yummlyIDSearchData);
   });
 }
 
