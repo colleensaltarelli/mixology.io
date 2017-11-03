@@ -120,6 +120,7 @@ function yummlyIDSearchData(data) {
   else {
     console.log(data);
     getRecipeDataFromYummlyApi(data.matches[0].id, displayYummlyRecipeSearchData);    
+    showHideResults()
   }
 }
 
@@ -149,7 +150,6 @@ function watchSubmit() {
     queryTarget.val("");
     getDataFromYouTubeApi(query, displayYouTubeSearchData);
     getIDDataFromYummlyApi(query, yummlyIDSearchData);
-    showHideResults();
   });
 }
 
