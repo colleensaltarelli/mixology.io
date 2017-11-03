@@ -100,10 +100,22 @@ function displayYouTubeSearchData(data) {
   $('.js-youtube-search-results').html(youTubeResults);
 }
 
+// on click event to check is page is hidden, if not change the class on page to 'hidden', remove the hidden class from page. 
+function showHideNoResults() {
+  $('.js-no-results-page').hasClass("hidden") ? $('.js-no-results-page').removeClass("hidden") : $('.js-no-results-page').addClass("hidden");
+  $('.js-search-page').hasClass("hidden") ? $('.js-search-page').removeClass("hidden") : $('.js-search-page').addClass("hidden");
+}
+
+// on click event to check is page is hidden, if not change the class on page to 'hidden', remove the hidden class from page. 
+function showHideResults() {
+  $('.js-results-page').hasClass("hidden") ? $('.js-results-page').removeClass("hidden") : $('.js-results-page').addClass("hidden");
+  $('.js-search-page').hasClass("hidden") ? $('.js-search-page').removeClass("hidden") : $('.js-search-page').addClass("hidden");
+}
+
 //function to loop over the data from the API then get the recipe ID
 function yummlyIDSearchData(data) {
   if (!data.matches.length) {
-    console.log('no matches');
+    showHideNoResults();
   }
   else {
     console.log(data);
@@ -117,6 +129,14 @@ function displayYummlyRecipeSearchData(data) {
     $('.js-yummly-search-results').html(renderYummlyResult(data));
   }
 
+//function to watch for click event and run functions
+$( ".js-try-again" ).on('click', function(event) {
+  showHideNoResults();
+});
+//function to watch for click event and run functions
+$( ".js-search-again" ).on('click', function(event) {
+  showHideResults();
+});
 
 //function to watch for click event and run functions
 function watchSubmit() {
@@ -129,6 +149,7 @@ function watchSubmit() {
     queryTarget.val("");
     getDataFromYouTubeApi(query, displayYouTubeSearchData);
     getIDDataFromYummlyApi(query, yummlyIDSearchData);
+    showHideResults();
   });
 }
 

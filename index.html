@@ -18,26 +18,35 @@
         </div>
     </header>
     <main role="main">
-        <div class="row" >
+        <div class="row js-search-page" >
             <div class="col-12 main-bar">
-            <section class="search-area">
-                <form action="#" class="js-search-form">
-                <label for="query"></label>
-                <input aria-label="search-term" id="query" type="text" name="query" class="js-query" placeholder="Search Term">
-                <button type="submit">Search</button>
-                </form>
-            </section> 
+                <section class="search-area">
+                    <form action="#" class="js-search-form">
+                        <label for="query"></label>
+                        <input aria-label="search-term" id="query" type="text" name="query" class="js-query" placeholder="Search Term">
+                        <button type="submit">Search</button>
+                    </form>
+                </section> 
             </div>
+        </div>
+        <div class="row js-results-page hidden" >
             <section class="results-area">
                 <div class="col-6">
-                <div aria-live="assertive" class="row js-yummly-search-results">
-                </div>
+                    <div aria-live="assertive" class="row js-yummly-search-results">
+                    </div>
                 </div>
                 <div class="col-6">
-                <div aria-live="assertive" class="row js-youtube-search-results">
+                    <div aria-live="assertive" class="row js-youtube-search-results">
+                    </div>
                 </div>
-                </div>
+                <a class="btn js-search-again"href="#">Search Again</a>
             </section>
+        </div>
+        <div class="row js-no-results-page hidden" >
+            <div class="col-12">
+                <h2>No Results</h2>
+                <a class="btn js-try-again"href="#">Try Again</a>
+            </div>
         </div>
     </main>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
