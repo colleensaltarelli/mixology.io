@@ -87,7 +87,7 @@ function renderYummlyResult(result) {
           <ul class="ingredient-list">
           ${indredientList}
           </ul>
-          <a class="btn full-recipe" href="${result.attribution.url}" target="_blank">View Full Recipe</a>
+          <a class="btn try-again full-recipe" href="${result.attribution.url}" target="_blank">View Full Recipe</a>
           <span class="yummly-attribution">${result.attribution.html}</span>
         </div>  
       </div>
@@ -101,26 +101,22 @@ function displayYouTubeSearchData(data) {
 }
 
 // on click event to check is page is hidden, if not change the class on page to 'hidden', remove the hidden class from page. 
-function showHideNoResults() {
-  $('.js-no-results-page').hasClass("hidden") ? $('.js-no-results-page').removeClass("hidden") : $('.js-no-results-page').addClass("hidden");
-  $('.js-search-page').hasClass("hidden") ? $('.js-search-page').removeClass("hidden") : $('.js-search-page').addClass("hidden");
+function showPanel(panel) {
+  $('.js-panel').removeClass('active');
+  $(panel).addClass("active");
 }
 
-// on click event to check is page is hidden, if not change the class on page to 'hidden', remove the hidden class from page. 
-function showHideResults() {
-  $('.js-results-page').hasClass("hidden") ? $('.js-results-page').removeClass("hidden") : $('.js-results-page').addClass("hidden");
-  $('.js-search-page').hasClass("hidden") ? $('.js-search-page').removeClass("hidden") : $('.js-search-page').addClass("hidden");
-}
+showPanel('.js-search-page');
 
 //function to loop over the data from the API then get the recipe ID
 function yummlyIDSearchData(data) {
   if (!data.matches.length) {
-    showHideNoResults();
+    showPanel('.js-no-results-page');
   }
   else {
     console.log(data);
     getRecipeDataFromYummlyApi(data.matches[0].id, displayYummlyRecipeSearchData);    
-    showHideResults()
+    showPanel('.js-results-page');
   }
 }
 
@@ -132,11 +128,12 @@ function displayYummlyRecipeSearchData(data) {
 
 //function to watch for click event and run functions
 $( ".js-try-again" ).on('click', function(event) {
-  showHideNoResults();
+  showPanel('.js-search-page');
 });
+
 //function to watch for click event and run functions
 $( ".js-search-again" ).on('click', function(event) {
-  showHideResults();
+  showPanel('.js-search-page');
 });
 
 //function to watch for click event and run functions

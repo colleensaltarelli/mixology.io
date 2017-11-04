@@ -1,8 +1,158 @@
+body {
+    background: url("hero-bw.png") no-repeat center center fixed;
+    background-size: cover;
+}
+
+h1, h2, h3, h4, h5 {
+    font-family: 'IM Fell Double Pica', serif;
+    color: #332317;
+}
+
+p, a, span, ul, li, .btn {
+    font-family: 'Raleway', sans-serif;
+    text-decoration: none;
+    color: #332317;
+}
+
+.header-bar h1 {
+    text-align: center;
+    margin-top: 120px;
+    color: white;
+    font-size: 3rem;
+}
+
+.main-bar p {
+    text-align: center;
+    color: white;
+    font-size: 1.3rem;
+    padding: 0px 50px;
+}
+
+.search-area {
+    text-align: center;
+}
+
+.search-area input, .search-area button {
+    display: inline-block;
+}
+
+.search-area input {
+    width: 50%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border-radius: 2px;
+    border: none;
+    outline-color: #B67D53;
+    color: #332317;
+    font-family: 'Raleway', sans-serif;
+}
+
+.search-area input::placeholder {
+  color: #6F4D33;
+}
+
+.btn, .btn:visited {
+    border-radius: 2px;
+    border: 1px solid white;
+    padding: 12px 20px;
+    margin: 8px 0;
+    color: white;
+    background-color: #6F4D33;
+    font-weight: bold;
+}
+
+.btn:hover, .btn:active, .btn:focus  {
+    background-color: white;
+    color: #6F4D33;;
+    font-weight: bold;
+    outline: none;
+    border: 1px solid #6F4D33;
+}
+
+.btn.try-again, .btn:visited.try-again {
+    color: white;
+    background-color: #6F4D33;
+    border: 1px solid white;
+}
+
+.btn:hover.try-again, .btn:active.try-again, .btn:focus.try-again  {
+    color:#6F4D33;
+    background-color: white;
+    border: 1px solid #6F4D33;
+}
+
+.results-area {
+    background-color: white;
+    border-radius: 2px;
+    padding: 30px;
+}
+
+.results-area h2{
+    margin-top: 0;
+}
+
+.results-area h3{
+    font-family: 'Raleway', sans-serif;
+}
+
+.results-area ul{
+    padding-left: 0;
+}
+
+.results-area ul li{
+    list-style: none;
+}
+
+.results-area a.btn {
+    display: inline-block;
+    margin: 10px 0;
+}
+
+.results-area .to-center-btn {
+    text-align: center;
+}
+
+.results-area a.btn.try-again {
+    display: inline-block;
+    margin-top: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.results-area span {
+    display: block;
+    font-size: .8rem;
+}
+
+.results-area p.video-title {
+    text-align: center;
+}
+
+
+
+.no-results-page h2 {
+    text-align: center;
+    color: white;
+    font-family: 'Raleway', sans-serif;
+}
+.no-results-page a {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    width: 200px;
+}
+
 iframe {
     width: 100%;
     min-height: 250px;
 }
 
-.hidden {
-    display: none;
+.panel {
+    display: none;    
+}
+
+.active { 
+    display: block;    
 }

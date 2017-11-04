@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css">
+    <link href="https://fonts.googleapis.com/css?family=IM+Fell+Double+Pica|Raleway" rel="stylesheet">
     <link href="float-grid.css" rel="stylesheet" type="text/css" />
     <link href="index.css" rel="stylesheet" type="text/css" />
     <title>mixology.io</title>
@@ -18,18 +19,19 @@
         </div>
     </header>
     <main role="main">
-        <div class="row js-search-page" >
+        <div class="row panel js-panel js-search-page ">
             <div class="col-12 main-bar">
+                <p>To get started, simply type the name of your favorite classic cocktail below. Mixology.io will provide you with a list of ingredients, a recipie and instructional video to mix up some fun of your own! Give it a try... </p>                    
                 <section class="search-area">
                     <form action="#" class="js-search-form">
                         <label for="query"></label>
-                        <input aria-label="search-term" id="query" type="text" name="query" class="js-query" placeholder="Search Term">
-                        <button type="submit">Search</button>
+                        <input aria-label="search-term" id="query" type="text" name="query" class="js-query" placeholder="Cocktail Name">
+                        <button class="btn" type="submit">Search</button>
                     </form>
                 </section> 
             </div>
         </div>
-        <div class="row js-results-page hidden" >
+        <div class="row panel js-panel js-results-page">
             <section class="results-area">
                 <div class="col-6">
                     <div aria-live="assertive" class="row js-yummly-search-results">
@@ -39,13 +41,15 @@
                     <div aria-live="assertive" class="row js-youtube-search-results">
                     </div>
                 </div>
-                <a class="btn js-search-again"href="#">Search Again</a>
+                <div class="to-center-btn">
+                    <a class="btn try-again js-search-again"href="#">Search Again</a>
+                </div>
             </section>
         </div>
-        <div class="row js-no-results-page hidden" >
+        <div class="row panel js-panel js-no-results-page no-results-page">
             <div class="col-12">
-                <h2>No Results</h2>
-                <a class="btn js-try-again"href="#">Try Again</a>
+                <h2>Sorry, no results for that search!</h2>
+                <a class="btn try-again js-try-again"href="#">Please Try Again</a>
             </div>
         </div>
     </main>
