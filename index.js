@@ -105,7 +105,6 @@ function showPanel(panel) {
   $('.js-panel').removeClass('active');
   $(panel).addClass("active");
 }
-
 showPanel('.js-search-page');
 
 //function to loop over the data from the API then get the recipe ID
