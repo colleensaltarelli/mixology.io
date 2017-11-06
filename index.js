@@ -100,17 +100,17 @@ function displayYouTubeSearchData(data) {
   $('.js-youtube-search-results').html(youTubeResults);
 }
 
-// on click event to check is page is hidden, if not change the class on page to 'hidden', remove the hidden class from page. 
+//on click event to hide or show panels as called
 function showPanel(panel) {
-  $('.js-panel').removeClass('active');
-  $(panel).addClass("active");
+  $('.js-main').fadeOut(500,() => {
+    $('.js-panel').removeClass('active');
+    $(panel).addClass("active");
+    $('.js-main').fadeIn(500);
+  })
 }
 showPanel('.js-search-page');
 
-//add animation classes to results area
-function addAnimation(panel) {
-  $(panel).addClass("animated slideInUp");
-}
+
 
 //function to loop over the data from the API then get the recipe ID
 function yummlyIDSearchData(data) {
@@ -121,7 +121,6 @@ function yummlyIDSearchData(data) {
     console.log(data);
     getRecipeDataFromYummlyApi(data.matches[0].id, displayYummlyRecipeSearchData);    
     showPanel('.js-results-page');
-    addAnimation('.js-results-area');
   }
 }
 
