@@ -110,8 +110,6 @@ function showPanel(panel) {
 }
 showPanel('.js-search-page');
 
-
-
 //function to loop over the data from the API then get the recipe ID
 function yummlyIDSearchData(data) {
   if (!data.matches.length) {
