@@ -4,4 +4,4 @@ Thinkful (https://www.thinkful.com/) course first capstone project - an instruct
 
 ##Screen Shots:
 
-![alt text](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "home search panel")
+![alt text](https://raw.githubusercontent.com/colleensaltarelli/mixology.io/master/home-search-panel.png "home search panel")
