@@ -64,7 +64,7 @@ function renderYouTubeResult(result) {
   return `
     <div class="js-video-thumb-box video-thumb-box">
       <div class="js-video-thumb video-thumb">
-          <iframe src="https://www.youtube.com/embed/${result.id.videoId}" frameborder="0" allowfullscreen></iframe>
+          <iframe  role="presentation" title="video"  aria-label="video" src="https://www.youtube.com/embed/${result.id.videoId}" frameborder="0" allowfullscreen></iframe>
         <p class="video-title">${result.snippet.title}</p>
       </div>  
     </div>
@@ -107,6 +107,11 @@ function showPanel(panel) {
 }
 showPanel('.js-search-page');
 
+//add animation classes to results area
+function addAnimation(panel) {
+  $(panel).addClass("animated slideInUp");
+}
+
 //function to loop over the data from the API then get the recipe ID
 function yummlyIDSearchData(data) {
   if (!data.matches.length) {
@@ -116,6 +121,7 @@ function yummlyIDSearchData(data) {
     console.log(data);
     getRecipeDataFromYummlyApi(data.matches[0].id, displayYummlyRecipeSearchData);    
     showPanel('.js-results-page');
+    addAnimation('.js-results-area');
   }
 }
 
